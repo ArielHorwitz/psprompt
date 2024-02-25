@@ -2,8 +2,8 @@ use clap::Parser;
 use psprompt::Style;
 use std::path::PathBuf;
 
-pub const ABOUT: &str = "Generate colorful prompts for bash.";
-pub const LONG_ABOUT: &str = "Generate colorful prompts for bash.
+pub const ABOUT: &str = "Generate colorful prompts for the terminal.";
+pub const LONG_ABOUT: &str = "Generate colorful prompts for the terminal.
 
 ## Generate the config:
 psprompt --generate > ~/.config/psprompt.toml
@@ -20,7 +20,7 @@ echo 'eval $(psprompt)' >> ~/.bashrc";
 #[clap(long_about = LONG_ABOUT)]
 #[clap(author = "https://ariel.ninja")]
 pub struct Cli {
-    /// Config file (overriden by command line arguments)
+    /// Config file (default: ~/.config/psprompt.toml)
     #[arg(long)]
     config: Option<PathBuf>,
     /// Print template config file
@@ -38,9 +38,6 @@ pub struct Cli {
     /// Location
     #[arg(short = 'L', long)]
     location: Option<String>,
-    /// Icon
-    #[arg(short = 'I', long)]
-    icon: Option<String>,
 }
 
 fn main() {
@@ -66,10 +63,6 @@ fn main() {
     };
     if let Some(location) = args.location {
         config.text.loc = location;
-    };
-    if let Some(icon) = args.icon {
-        config.text.icon_ok = icon.to_owned();
-        config.text.icon_err = icon;
     };
     psprompt::write(&config);
 }

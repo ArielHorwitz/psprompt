@@ -1,5 +1,5 @@
 ```
-Generate colorful prompts for bash.
+Generate colorful prompts for the terminal.
 
 ## Generate the config:
 psprompt --generate > ~/.config/psprompt.toml
@@ -14,7 +14,7 @@ Usage: psprompt [OPTIONS]
 
 Options:
       --config <CONFIG>
-          Config file (overriden by command line arguments)
+          Config file (default: ~/.config/psprompt.toml)
 
       --generate
           Print template config file
@@ -22,7 +22,7 @@ Options:
   -s, --style <STYLE>
           Style
           
-          [possible values: double, extended, simple, small, micro, nano]
+          [possible values: double, extended, full, normal, micro, nano]
 
   -U, --user <USER>
           User name
@@ -32,9 +32,6 @@ Options:
 
   -L, --location <LOCATION>
           Location
-
-  -I, --icon <ICON>
-          Icon
 
   -h, --help
           Print help (see a summary with '-h')
