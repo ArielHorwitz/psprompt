@@ -7,7 +7,8 @@ pub fn apply_colors(text: &Components<String>, fg: &Components<Color>) -> Compon
         host: StyledText::new(&text.host, fg.host),
         loc: StyledText::new(&text.loc, fg.loc),
         prompt: StyledText::new(&text.prompt, fg.prompt),
-        icon: StyledText::new(&text.icon, fg.icon),
+        icon_ok: StyledText::new(&text.icon_ok, fg.icon_ok),
+        icon_err: StyledText::new(&text.icon_err, fg.icon_err),
         at: StyledText::new(&text.at, fg.at),
         sleft: StyledText::new(&text.sleft, fg.sleft),
         sright: StyledText::new(&text.sright, fg.sright),
@@ -19,10 +20,14 @@ pub fn format(components: &Components<StyledText>, command_color: Color, style: 
         r"\[\e[38;2;{};{};{}m\]",
         command_color.0, command_color.1, command_color.2
     );
+    let icon = format!(
+        "$([[ $? -eq 0 ]] && echo \"{}\" || echo \"{}\")",
+        components.icon_ok, components.icon_err
+    );
     let ps = match style {
         Style::Double => format!(
             r"{} {}{}{} {} {} {}\n{}",
-            components.icon,
+            icon,
             components.user,
             components.at,
             components.host,
@@ -33,7 +38,7 @@ pub fn format(components: &Components<StyledText>, command_color: Color, style: 
         ),
         Style::Extended => format!(
             "{} {}{}{}{}{} {}",
-            components.icon,
+            icon,
             components.user,
             components.at,
             components.host,
@@ -52,20 +57,10 @@ pub fn format(components: &Components<StyledText>, command_color: Color, style: 
         ),
         Style::Small => format!(
             "{}{}{} {}",
-            components.user,
-            components.sright,
-            components.loc,
-            components.prompt,
+            components.user, components.sright, components.loc, components.prompt,
         ),
-        Style::Micro => format!(
-            "{} {}",
-            components.icon,
-            components.prompt,
-        ),
-        Style::Nano => format!(
-            "{}",
-            components.prompt,
-        ),
+        Style::Micro => format!("{} {}", icon, components.prompt,),
+        Style::Nano => format!("{}", components.prompt,),
     };
     format!("{ps}{RESET}{command_color}")
 }

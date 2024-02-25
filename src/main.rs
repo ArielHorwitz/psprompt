@@ -14,7 +14,6 @@ eval $(psprompt)
 ## Apply to new sessions:
 echo 'eval $(psprompt)' >> ~/.bashrc";
 
-
 #[derive(Debug, Parser)]
 #[clap(name = "psprompt")]
 #[clap(about = ABOUT)]
@@ -69,7 +68,8 @@ fn main() {
         config.text.loc = location;
     };
     if let Some(icon) = args.icon {
-        config.text.icon = icon;
+        config.text.icon_ok = icon.to_owned();
+        config.text.icon_err = icon;
     };
     psprompt::write(&config);
 }

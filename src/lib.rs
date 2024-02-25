@@ -19,13 +19,14 @@ pub enum Style {
 #[derive(Debug, Deserialize, Clone)]
 pub struct Components<T>
 where
-    T: Clone
+    T: Clone,
 {
     pub user: T,
     pub host: T,
     pub loc: T,
     pub prompt: T,
-    pub icon: T,
+    pub icon_ok: T,
+    pub icon_err: T,
     pub at: T,
     pub sleft: T,
     pub sright: T,
@@ -33,7 +34,7 @@ where
 
 impl<T> From<Components<T>> for Components<Color>
 where
-    T: std::fmt::Display + Clone
+    T: std::fmt::Display + Clone,
 {
     fn from(value: Components<T>) -> Self {
         Components {
@@ -41,7 +42,8 @@ where
             host: Color::from_hex(&value.host.to_string()),
             loc: Color::from_hex(&value.loc.to_string()),
             prompt: Color::from_hex(&value.prompt.to_string()),
-            icon: Color::from_hex(&value.icon.to_string()),
+            icon_ok: Color::from_hex(&value.icon_ok.to_string()),
+            icon_err: Color::from_hex(&value.icon_err.to_string()),
             at: Color::from_hex(&value.at.to_string()),
             sleft: Color::from_hex(&value.sleft.to_string()),
             sright: Color::from_hex(&value.sright.to_string()),
