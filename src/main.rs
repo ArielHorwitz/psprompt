@@ -16,9 +16,8 @@ echo 'eval $(psprompt)' >> ~/.bashrc";
 
 #[derive(Debug, Parser)]
 #[clap(name = "psprompt")]
-#[clap(about = ABOUT)]
-#[clap(long_about = LONG_ABOUT)]
-#[clap(author = "https://ariel.ninja")]
+#[clap(about = ABOUT, long_about = LONG_ABOUT)]
+#[clap(version, author = "https://ariel.ninja")]
 pub struct Cli {
     /// Config file (default: ~/.config/psprompt.toml)
     #[arg(long)]
