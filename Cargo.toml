@@ -4,6 +4,7 @@ version = "0.1.1"
 edition = "2021"
 description = "Create colorful prompts for the terminal"
 repository = "https://github.com/ArielHorwitz/psprompt"
+license = "Unlicense"
 keywords = [
     "terminal",
     "color",
