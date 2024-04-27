@@ -3,13 +3,12 @@
 set -e
 cd $(dirname $0)
 
-TEMPFILE="target/README.md"
+rm "README.md"
 
-exec &> $TEMPFILE
+exec &> "README.md"
 echo '```'
 cargo run --quiet -- --help
 echo '```'
 exec &> /dev/tty
 
-mv $TEMPFILE .
 echo success
