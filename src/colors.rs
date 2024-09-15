@@ -2,6 +2,8 @@
 pub struct Color(pub u8, pub u8, pub u8);
 
 impl Color {
+    #[allow(clippy::missing_panics_doc)]
+    #[must_use]
     pub fn from_hex(hex: &str) -> Self {
         let (r, gb) = hex.split_at(2);
         let (g, b) = gb.split_at(2);
@@ -21,6 +23,7 @@ pub struct StyledText {
 }
 
 impl StyledText {
+    #[must_use]
     pub fn new(text: &str, fg: Color) -> Self {
         Self {
             text: text.to_owned(),

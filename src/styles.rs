@@ -13,6 +13,7 @@ pub enum Style {
     nano,
 }
 
+#[must_use]
 pub fn format(config: &Config) -> String {
     let components = apply_colors(&config.text, &config.fg.clone().into());
     let command_color = Color::from_hex(&config.command.fg);

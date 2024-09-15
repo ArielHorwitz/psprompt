@@ -64,6 +64,8 @@ pub struct Command {
     pub fg: String,
 }
 
+#[allow(clippy::missing_panics_doc)]
+#[must_use]
 pub fn read_config(path: &std::path::Path) -> Config {
     let config_text = std::fs::read_to_string(path).expect("read config file");
     toml::from_str(&config_text).expect("parse config toml")
