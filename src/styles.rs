@@ -23,7 +23,7 @@ pub fn format(config: &Config) -> String {
     );
     let icon = if config.show_error_icon {
         format!(
-            "$([[ $? -eq 0 ]] && echo \"{}\" || echo \"{}\") ",
+            "$(exit_code=$?; [[ $exit_code -eq 0 ]] && echo \"{}\" || echo \"{}\") ",
             components.icon_ok, components.icon_err
         )
     } else {
